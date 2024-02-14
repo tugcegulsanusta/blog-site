@@ -1,5 +1,4 @@
 package com.pinsoft.blogsite;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,5 +8,6 @@ public class BlogSiteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BlogSiteApplication.class, args);
 	}
+
 
 }
