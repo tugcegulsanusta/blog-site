@@ -26,8 +26,8 @@ public class PostResolver {
     @Autowired
     private CategoryRepository categoryRepository;
     @QueryMapping
-    public List<Post> getPostsByHeader(@Argument String header){
-        return postRepository.getByHeader(header);
+    public Post findByHeader(@Argument String header){
+        return postRepository.findByHeader(header);
     }
 
     @MutationMapping

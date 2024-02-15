@@ -14,7 +14,7 @@ schema {
     mutation: Mutation
 }
 type Query {
-    getPostsByHeader(type: String): [Post]
+    findByHeader(header: String): Post
 }
 type Mutation {
     createPost(header: String!, content: String!, base64img: String, categoryName: String): Post!
