@@ -1,12 +1,26 @@
-type User{
-    id: ID!
-    username: String!
-    email: String!
-    password: String!
+type Post{
+    id: ID!,
+    header: String!,
+    content: String!,
+    base64img: String,
+    category: Category
+}
+type Category{
+    id: ID!,
+    name: String!
+}
+input PostDto{
+    header: String!,
+    content: String!,
+    base64img: String
+}
+schema {
+    query: Query
+    mutation: Mutation
 }
 type Query {
-    findById(id: ID): User
+    getPostsByHeader(type: String): [Post]
 }
 type Mutation {
-    createUser(username: String!, email: String!): User
+    createPost(post: PostDto): Post
 }
