@@ -1,8 +1,9 @@
 package com.pinsoft.blogsite.resolver;
 
-import com.pinsoft.blogsite.dto.PostDto;
+
 import com.pinsoft.blogsite.entity.Category;
 import com.pinsoft.blogsite.entity.Post;
+import com.pinsoft.blogsite.repository.CategoryRepository;
 import com.pinsoft.blogsite.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,26 +12,36 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
+import java.util.Optional;
+
 @Controller
 @Component
 @RequiredArgsConstructor
 public class PostResolver {
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
     @QueryMapping
     public List<Post> getPostsByHeader(@Argument String header){
         return postRepository.getByHeader(header);
     }
 
     @MutationMapping
-    public Post createPost(@Argument(value = "post") PostDto postDto){
+    public Post createPost(@Argument String header,
+                           @Argument String content,
+                           @Argument String base64img,
+                           @Argument String categoryName
+    ){
         Post post = new Post();
-        post.setHeader(post.getHeader());
-        post.setContent(post.getContent());
-        post.setBase64img(post.getBase64img());
-
+        post.setHeader(header);
+        post.setContent(content);
+        post.setBase64img(base64img);
+        Optional<Category> category = categoryRepository.findByName(categoryName);
+        post.setCategory(category.get());
         return postRepository.save(post);
     }
 }

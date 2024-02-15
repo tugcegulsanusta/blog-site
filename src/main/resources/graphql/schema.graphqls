@@ -9,8 +9,6 @@ type Category{
     id: ID!,
     name: String!
 }
-
-
 schema {
     query: Query
     mutation: Mutation
@@ -19,11 +17,8 @@ type Query {
     getPostsByHeader(type: String): [Post]
 }
 type Mutation {
-    createPost(input: PostInput): Post!
+    createPost(header: String!, content: String!, base64img: String, categoryName: String): Post!
     createCategory(name: String): Category!
+
 }
-input PostInput{
-    header:String!
-    content:String!
-    base64img:String
-}
+
