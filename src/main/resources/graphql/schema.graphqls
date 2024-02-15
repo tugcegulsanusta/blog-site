@@ -3,17 +3,14 @@ type Post{
     header: String!,
     content: String!,
     base64img: String,
-    category: Category
+    category: Category!
 }
 type Category{
     id: ID!,
     name: String!
 }
-input PostDto{
-    header: String!,
-    content: String!,
-    base64img: String
-}
+
+
 schema {
     query: Query
     mutation: Mutation
@@ -22,5 +19,11 @@ type Query {
     getPostsByHeader(type: String): [Post]
 }
 type Mutation {
-    createPost(post: PostDto): Post
+    createPost(input: PostInput): Post!
+    createCategory(name: String): Category!
+}
+input PostInput{
+    header:String!
+    content:String!
+    base64img:String
 }
