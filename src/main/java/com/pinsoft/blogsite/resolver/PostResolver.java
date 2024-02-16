@@ -44,4 +44,14 @@ public class PostResolver {
         post.setCategory(category.get());
         return postRepository.save(post);
     }
+    @MutationMapping
+    public String deletePost(@Argument Long id) {
+        if(postRepository.findById(id).isPresent()){
+            postRepository.deleteById(id);
+            return "Post successfully deleted!";
+        }
+        else {
+            return "Given id is not exist!";
+        }
+    }
 }

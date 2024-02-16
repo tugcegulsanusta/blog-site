@@ -21,4 +21,14 @@ public class CategoryResolver {
         category.setName(name);
         return categoryRepository.save(category);
     }
+    @MutationMapping
+    public String deleteCategory(@Argument Long id) {
+        if(categoryRepository.findById(id).isPresent()){
+            categoryRepository.deleteById(id);
+            return "Category successfully deleted!";
+        }
+        else {
+            return "Given id is not exist!";
+        }
+    }
 }
