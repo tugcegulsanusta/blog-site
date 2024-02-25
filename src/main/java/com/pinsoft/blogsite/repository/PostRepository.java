@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByHeader(String header);
+    Post findByCategory(String category);
 }
