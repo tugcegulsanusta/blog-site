@@ -9,12 +9,19 @@ type Category{
     id: ID!,
     name: String!
 }
+type User{
+    id: ID!
+    username: String!
+    email: String!
+    password: String!
+}
 schema {
     query: Query
     mutation: Mutation
 }
 type Query {
     findByHeader(header: String): Post
+    getAll: [User]
 }
 type Mutation {
     createPost(header: String!, content: String!, base64img: String, categoryName: String): Post!
